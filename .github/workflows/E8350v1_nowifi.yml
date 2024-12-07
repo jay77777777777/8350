@@ -35,13 +35,16 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
+
+    permissions:
+      contents: write
 
     steps:
-    - name: Checkout
+    - name: 检查项目分支
       uses: actions/checkout@main
 
-    - name: Initialization environment
+    - name: 初始化编译环境
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
@@ -53,7 +56,21 @@ jobs:
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
-        sudo bash -c 'bash <(curl -s https://build-scripts.immortalwrt.org/init_build_environment.sh)'
+
+    - name: 清理磁盘空间(Ubuntu)
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actually needed,
+        # when set to "true" but frees about 6 GB
+        tool-cache: true
+        
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        swap-storage: true
     - name: Clone source code
       working-directory: /workdir
       run: |
