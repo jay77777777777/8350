@@ -23,7 +23,7 @@ env:
  #  REPO_URL: https://github.com/coolsnowwolf/lede
  #  REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: config/E8350v1_nowifi.config
+  CONFIG_FILE: config/nss.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: false
@@ -85,7 +85,8 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        git clone -b openwrt-24.10 https://github.com/immortalwrt/immortalwrt openwrt
+        # git clone -b openwrt-24.10 https://github.com/immortalwrt/immortalwrt openwrt
+        git clone -b openwrt-24.10 https://github.com/LiBwrt/openwrt-6.x openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
     - name: Load custom feeds
