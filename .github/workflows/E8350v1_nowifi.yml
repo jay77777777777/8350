@@ -87,7 +87,7 @@ jobs:
         df -hT $PWD
         # git clone -b openwrt-24.10 https://github.com/immortalwrt/immortalwrt openwrt
         # git clone -b openwrt-24.10 https://github.com/LiBwrt/openwrt-6.x openwrt
-        git clone -b 24.10-nss https://github.com/qosmio/openwrt-ipq openwrt
+        git clone https://github.com/openwrt/openwrt openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
     - name: Load custom feeds
